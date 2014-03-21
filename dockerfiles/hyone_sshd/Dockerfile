@@ -3,13 +3,14 @@ MAINTAINER hyone "hyone.development@gmail.com"
 
 ## Install
 
-RUN apt-get install -q -y \
-  openssh-server \
-  monit ; \
-  curl -L http://toolbelt.treasuredata.com/sh/install-ubuntu-precise.sh | sh ; \
-  /usr/lib/fluent/ruby/bin/gem install \
-    fluent-plugin-record-modifier  \
-    fluent-plugin-route
+RUN apt-get install -q -y --no-install-recommends \
+      openssh-server \
+      monit ; \
+    curl -L http://toolbelt.treasuredata.com/sh/install-ubuntu-precise.sh | sh ; \
+    echo 'gem: --no-rdoc --no-ri' > ~/.gemrc ; \
+    /usr/lib/fluent/ruby/bin/gem install \
+      fluent-plugin-record-modifier  \
+      fluent-plugin-route
 
 # monit and td-agent settings
 ADD td-agent/td-agent.conf /etc/td-agent/td-agent.conf
