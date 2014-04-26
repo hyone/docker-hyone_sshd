@@ -3,11 +3,10 @@ MAINTAINER hyone "hyone.development@gmail.com"
 
 ## Install
 
-RUN apt-get install -q -y --no-install-recommends \
+RUN apt-get install -q -y \
       openssh-server \
       monit ; \
     curl -L http://toolbelt.treasuredata.com/sh/install-ubuntu-precise.sh | sh ; \
-    echo 'gem: --no-rdoc --no-ri' > ~/.gemrc ; \
     /usr/lib/fluent/ruby/bin/gem install \
       fluent-plugin-record-modifier  \
       fluent-plugin-route
@@ -29,15 +28,11 @@ ADD ./docker-dev.pub   /root/.ssh/authorized_keys
 RUN chmod 700 /root/.ssh ; \
     chmod 600 /root/.ssh/authorized_keys ; \
     chown root:root -R /root/.ssh ; \
-    mkdir -p /var/run/sshd ; \
+    mkdir -p /var/run/sshd
 
 ## Command
 
 CMD ["/usr/bin/monit", "-I"]
 
-# sshd
-EXPOSE 22
-# monit
-EXPOSE 2812
-# for fluentd
-EXPOSE 24220 24224
+# sshd, monit, fluentd
+EXPOSE 22 2812 24220 24224
