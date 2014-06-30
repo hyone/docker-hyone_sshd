@@ -42,7 +42,8 @@ RSpec.configure do |c|
       ).start(
         PortBindings: {
           '22/tcp' => [{HostIp: '0.0.0.0'}]
-        }
+        },
+        Privileged: true
       )
       sleep 5
       containers << container

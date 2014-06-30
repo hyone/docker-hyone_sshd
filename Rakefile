@@ -13,7 +13,8 @@ MyDockerRake::Tasks.new do |c|
     {
       name: 'hyone.sshd',
       image: 'hyone/sshd',
-      ports: [22, 2812, 24220, 24224, '24224/udp']
+      ports: [22, 2812, 24220, 24224, '24224/udp'],
+      options: '--privileged'
     }
   ]
 
