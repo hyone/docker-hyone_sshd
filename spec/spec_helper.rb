@@ -20,6 +20,9 @@ RSpec.configure do |c|
       end
     end
 
+  # force to use http
+  Docker.options[:scheme] = 'http'
+
   c.before :all do
     block = self.class.metadata[:example_group_block]
     if RUBY_VERSION.start_with?('1.8')
