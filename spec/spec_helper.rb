@@ -55,7 +55,7 @@ RSpec.configure do |c|
       c.host  = host
       options = {
         keys: [File.expand_path('~/.ssh/docker-dev')],
-        port: container.json['HostConfig']['PortBindings']['22/tcp'][0]['HostPort'].to_i
+        port: container.json['NetworkSettings']['Ports']['22/tcp'][0]['HostPort'].to_i
       }
       c.ssh = Net::SSH.start(
         docker_host ? docker_host.host : '127.0.0.1',
